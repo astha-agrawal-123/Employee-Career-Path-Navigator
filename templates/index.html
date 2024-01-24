@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Recommendation System</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: url('{{ background_image_url }}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #000000; 
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .logo {
+            margin-right: 5px;
+            width: 50px;
+        }
+
+        .title_text {
+            font-size: 35px;
+            font-weight: bolder;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+            font-weight: bold;
+            font-size: 37px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2px;
+        }
+
+        h4 {
+            text-align: center;
+            color: #000000;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .glass-box {
+            /* background-color: rgba(189, 212, 220, 0.094); */
+            background-color: rgba(206, 224, 228, 0.3);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            max-width: 400px;
+            width: calc(100% - 10px);
+            margin-left: 20px;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        form {
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 60px rgba(200, 200, 200, 0.03);
+            background-color: rgba(255, 255, 255, 0.06);
+            max-width: 320px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #9c839a; 
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #8d469c;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <img class="logo" alt="" src="{{ url_for('static', filename='logo.png') }}">
+        <b class="title_text">areerCatalyst</b>
+    </div>
+    <div class="glass-box">
+        <h2>Welcome!</h2>
+        <h4>Step Forward to Your Personalized Career Exploration Hub.</h4>
+        <form action="/recommendations" method="post">
+            <label for="emp_id">Enter Employee ID:</label>
+            <input type="text" id="emp_id" name="emp_id" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+    </div>
+</body>
+</html>

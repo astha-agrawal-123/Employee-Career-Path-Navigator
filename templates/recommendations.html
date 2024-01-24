@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: url('{{ background_image_url }}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: transparent; 
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            background: transparent;
+            height: 100vh;
+        }
+
+        .sidebar {
+
+            width: 20%;
+            background-color: #e7e0e6;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            padding: 10px; 
+            box-sizing: border-box;
+            position: fixed;
+            height: 100vh;
+            z-index: 1;
+            font-size: 14px;
+        }
+        .logo {
+            margin-right: 5px;
+            width: 35px;
+            vertical-align: middle;
+        }
+
+        .title_text {
+            font-size: 20px;
+            font-weight: bolder;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            vertical-align: middle;
+            color: #252525;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 8px;
+            background-color: #96A8C0; 
+            color: #fff; 
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li a:hover {
+            transform: translateY(-5px);
+            background-color: #453b77;
+        }
+
+        .content {
+            width: 80%;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-left: 20%; 
+            transition: margin-left 0.3s;
+        }
+
+        .profile-section,
+        .dashboard-section {
+            width: 100%; 
+            display: none;
+        }
+
+        .content.show-profile,
+        .content.show-dashboard,
+        .content.show-dashboard-by-default { 
+            margin-left: 20%;
+        }
+
+        
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #9c839a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #8d469c;
+        }
+
+        .profile-section, .h2, .ul {
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .profile-section ul {
+            text-align: left;
+        }
+
+        .details {
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .link-custom-color {
+            color: #5952c2; 
+            text-decoration: none; 
+        }
+
+        .link-custom-color:hover {
+            color: #96A8C0
+        }
+
+        .aboutus-section section{
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .contactus-section, .section, .sec1 {
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .contactus-section form {
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px; 
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #c3bdbd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #9c839a;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8d469c;
+        }
+
+        .profile-section, .dashboard-section h2 {
+            text-align: center;
+        }
+
+        .aboutus-section, .contactus-section h1{
+            text-align: center;
+        }
+
+        .aboutus-section ul {
+            list-style: none;
+            padding: 0; 
+        }
+
+        .aboutus-section li {
+            margin-bottom: 10px;
+        }
+
+
+    </style>
+
+    <script>
+        function toggleProfileSection() {
+            var profileSection = document.querySelector('.profile-section');
+            var dashboardSection = document.querySelector('.dashboard-section');
+            var aboutusSection = document.querySelector('.aboutus-section'); 
+            var contactusSection = document.querySelector('.contactus-section'); 
+            var content = document.querySelector('.content');
+
+            profileSection.style.display = 'block';
+            dashboardSection.style.display = 'none';
+            aboutusSection.style.display = 'none'; 
+            contactusSection.style.display = 'none'; 
+
+            content.classList.remove('show-dashboard');
+            content.classList.remove('show-aboutus'); 
+            content.classList.remove('show-contactus');
+            content.classList.add('show-profile');
+        }
+
+        function toggleDashboardSection() {
+            var profileSection = document.querySelector('.profile-section');
+            var dashboardSection = document.querySelector('.dashboard-section');
+            var aboutusSection = document.querySelector('.aboutus-section'); 
+            var contactusSection = document.querySelector('.contactus-section');
+            var content = document.querySelector('.content');
+
+            dashboardSection.style.display = 'block';
+            profileSection.style.display = 'none';
+            aboutusSection.style.display = 'none'; 
+            contactusSection.style.display = 'none';
+
+            content.classList.remove('show-profile');
+            content.classList.remove('show-aboutus');
+            content.classList.remove('show-contactus');
+            content.classList.add('show-dashboard');
+        }
+
+        function toggleAboutUsSection() {
+            var profileSection = document.querySelector('.profile-section');
+            var dashboardSection = document.querySelector('.dashboard-section');
+            var aboutusSection = document.querySelector('.aboutus-section');
+            var contactusSection = document.querySelector('.contactus-section');
+            var content = document.querySelector('.content');
+
+            aboutusSection.style.display = 'block';
+            profileSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+            contactusSection.style.display = 'none'; 
+
+            content.classList.remove('show-dashboard');
+            content.classList.remove('show-profile');
+            content.classList.remove('show-contactus'); 
+            content.classList.add('show-aboutus'); 
+        }
+
+        function toggleContactUsSection() {
+            var profileSection = document.querySelector('.profile-section');
+            var dashboardSection = document.querySelector('.dashboard-section');
+            var aboutusSection = document.querySelector('.aboutus-section'); 
+            var contactusSection = document.querySelector('.contactus-section');
+            var content = document.querySelector('.content');
+
+            contactusSection.style.display = 'block';
+            profileSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+            aboutusSection.style.display = 'none'; 
+
+            content.classList.remove('show-dashboard');
+            content.classList.remove('show-profile');
+            content.classList.remove('show-aboutus'); 
+            content.classList.add('show-contactus'); 
+        }
+
+        function showDashboardByDefault() {
+        var profileSection = document.querySelector('.profile-section');
+        var dashboardSection = document.querySelector('.dashboard-section');
+        var aboutusSection = document.querySelector('.aboutus-section'); 
+        var contactusSection = document.querySelector('.contactus-section');
+        var content = document.querySelector('.content');
+
+        profileSection.style.display = 'none';
+        aboutusSection.style.display = 'none'; 
+        contactusSection.style.display = 'none';
+        dashboardSection.style.display = 'block';
+
+        content.classList.remove('show-profile');
+        content.classList.remove('show-aboutus');
+        content.classList.remove('show-contactus');
+        content.classList.add('show-dashboard-by-default');
+    }
+
+    window.onload = showDashboardByDefault;
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img class="logo" alt="" src="{{ url_for('static', filename='logo.png') }}">
+            <b class="title_text">areerCatalyst</b>
+            <ul>
+                <li><a href="#" onclick="toggleProfileSection()">Profile</a></li>
+                <li><a href="#" onclick="toggleDashboardSection()">Dashboard</a></li>
+                <li><a href="#" onclick="toggleAboutUsSection()">About Us</a></li>
+                <li><a href="#" onclick="toggleContactUsSection()">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="profile-section">
+                {% if employee_details %}
+                    <h2>Details for Employee ID {{ employee_details.emp_id }}</h2>
+                    <ul>
+                        <li><strong>Name:</strong> {{ employee_details.employee_name }}</li>
+                        <li><strong>Current Job:</strong> {{ employee_details.current_job }}</li>
+                        <li><strong>Current Soft Skills:</strong> {{ employee_details.current_soft_skills }}</li>
+                        <li><strong>Current Tech Stack:</strong> {{ employee_details.current_tech_stack }}</li>
+                        <li><strong>Years of Experience:</strong> {{ employee_details.years_of_experience }}</li>
+                        <li><strong>Salary:</strong> {{ employee_details.salary }}</li>
+                    </ul>
+                    <hr>
+                {% endif %}
+                <div class="button-container">
+                    <a href="/" class="button">Back to Home</a>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Top 3 Job Recommendations:</h2>
+                {% if recommendations %}
+                    {% for recommendation in recommendations %}
+                        <div class="details">
+                            <p><strong>Job Role:</strong> {{ jobs_df.loc[recommendation[0], 'JOB_ROLE'] }}</p>
+                            <p><strong>Soft Skills Required:</strong> {{ jobs_df.loc[recommendation[0], 'SOFT_SKILLS_REQUIRED'] }}</p>
+                            <p><strong>Tech Stack Required:</strong> {{ jobs_df.loc[recommendation[0], 'TECHSTACK_REQUIRED'] }}</p>
+                            <p><strong>Salary:</strong> {{ jobs_df.loc[recommendation[0], 'SALARY'] }}</p>
+                            <p><strong>Development Plan:</strong> {{ jobs_df.loc[recommendation[0], 'DEVELOPMENT_PLAN'] }}</p>
+                            <p><strong>Resources:</strong> {% for resource in jobs_df.loc[recommendation[0], 'RESOURCES'].split(', ') %}<a href="{{ resource }}" target="_blank" class="link-custom-color">{{ resource }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                            <p><strong>Soft Skill Gap:</strong> {{ recommendation[1]['soft_skill_gap'] }}</p>
+                            <p><strong>Tech Stack Gap:</strong> {{ recommendation[1]['tech_stack_gap'] }}</p>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    <p>No recommendations available.</p>
+                {% endif %}
+                <div class="button-container">
+                    <a href="/" class="button">Back to Home</a>
+                </div>
+            </div>
+
+            <div class="aboutus-section">
+                <header>
+                    <h1>About Us</h1>
+                </header>
+
+                <section>
+                    <p>
+                        Career Catalyst is a pioneering platform dedicated to shaping the future of career advancement. We specialize in providing personalized job recommendations based on the current details of each employee.
+                        Founded in 2024, our mission is to revolutionize the job search experience, making it more efficient and tailored to individual skills and aspirations.
+                    </p>
+            
+                    <h2>Our Mission</h2>
+                    <p>
+                        At Career Catalyst, we leverage advanced algorithms and data analytics to analyze your current soft skills, tech stack, and professional background. 
+                        By understanding your unique profile, we can generate future job recommendations that align with your career goals.
+                    </p>
+            
+                    <h2>Our Team</h2>
+                    <p>
+                        Meet the dedicated individuals who drive the idea forward:
+                        <ul>
+                            <li>Akanksha Sinha</li>
+                            <li>Astha Agarwal</li>
+                            <li>Kanisha Bansal</li>
+                            <li>Anushka Saxena</li>
+                            <li>Ananya Sharma</li>
+                        </ul>
+                    </p>
+            
+                    <h2>Our Approach</h2>
+                    <p>
+                        Career Catalyst is committed to empowering individuals in their professional journey. We are driven by the belief that everyone deserves a fulfilling career, and our platform is designed to make that a reality.
+                    </p>
+                </section>
+            
+                <footer>
+                    &copy; 2024 Career Catalyst. All Rights Reserved.
+                </footer>
+                <div class="button-container">
+                    <a href="/" class="button">Back to Home</a>
+                </div>
+            </div>
+
+            <div class="contactus-section">
+                <header>
+                    <h1>Contact Us</h1>
+                </header>
+                
+                <section class="sec1">
+                    <h2>Get in Touch</h2>
+                    <p>
+                        We'd love to hear from you! If you have any questions, suggestions, or inquiries, please feel free to contact us using the form below or through our contact information.
+                    </p>
+
+                    <form action="#" method="post">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" required>
+            
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" name="email" required>
+            
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+            
+                        <button type="submit">Send Message</button>
+                    </form>
+                </section>
+            
+                <section>
+                    <h2>Contact Information</h2>
+                    <p>
+                        <strong>Email:</strong> info@careercataylst.com<br>
+                        <strong>Phone:</strong> +1 (555) 123-4567<br>
+                        <strong>Address:</strong> 123 Main Street, India
+                    </p>
+                </section>
+                <div class="button-container">
+                    <a href="/" class="button">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
